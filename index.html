@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Psychic Game</title>
+    <script src = "./assets/javascript/game.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -13,76 +14,9 @@
     <p>Guess what letter I'm thinking of</p>
     <p>Wins: <span id="win">0</span></p>
     <p>Losses: <span id="lose">0</span> </p>
-    <p>Guesses Left: <span id="left">9</span></p>
+    <p>Guesses left: <span id="tries">9</span></p>
     <p>Your Guess so far: <span id="guess"></span> </p>
 
-
-    <script>
-    
-        var guesses = document.getElementById("guess");
-        var left = 9;
-        var game = true;
-        var thinking = "a";
-        var wins = 0;
-        var losses = 0;
-        var myGuesses = new Set();
-        
-        function gameplay(event) {
-            myGuesses.clear();
-            left = 9;
-            var newG = document.createElement("span");
-            
-            if (!(event.keyCode < 90 && event.keyCode > 65)) {
-                return;
-            } else if (!myGuesses.has(event.key)) {
-                myGuesses.add(event.key);
-            }
-            console.log(myGuesses);
-        
-            newG.textContent = event.key + ", ";
-            guesses.appendChild(newG);
-            left--;
-            document.getElementById("left").innerHTML = left;
-        }
-
-        function initializeclear() {
-
-        }
-        function winning() {
-            wins++;
-            myGuesses.clear();
-            left = 9;
-            document.getElementById("win").innerHTML = wins;     
-            document.getElementById("left").innerHTML = left;
-            document.getElementById("guess").innerHTML = "";
-        }
-
-        function losing() {
-            losses++;
-            
-            document.getElementById("lose").innerHTML = losses;
-            document.getElementById("left").innerHTML = left;
-            document.getElementById("guess").innerHTML = "";
-        }
-
-        document.onkeyup = function (event) {
-            if (left > 0) {
-                if (event.key == thinking) {
-                    winning();
-                    gameplay(event);
-                } else {
-                gameplay(event);         
-                }
-            } else {
-                losing();
-                gameplay(event);
-            }
-        }
-
-
-
-
-    </script>
 </body>
 
 </html>
